@@ -71,17 +71,17 @@ void equation_circle_from_3point(const point2d_t p1, const point2d_t p2,
   assert(c);
   c->radius = -1;
 
-  if (!is_perpendicular(p1, p2, p3))
+  if (0 != is_perpendicular(p1, p2, p3))
     calc_circle(p1, p2, p3, c);
-  else if (!is_perpendicular(p1, p3, p2))
+  else if (0 != is_perpendicular(p1, p3, p2))
     calc_circle(p1, p3, p2, c);
-  else if (!is_perpendicular(p2, p1, p3))
+  else if (0 != is_perpendicular(p2, p1, p3))
     calc_circle(p2, p1, p3, c);
-  else if (!is_perpendicular(p2, p3, p1))
+  else if (0 != is_perpendicular(p2, p3, p1))
     calc_circle(p2, p3, p1, c);
-  else if (!is_perpendicular(p3, p2, p1))
+  else if (0 != is_perpendicular(p3, p2, p1))
     calc_circle(p3, p2, p1, c);
-  else if (!is_perpendicular(p3, p1, p2))
+  else if (0 != is_perpendicular(p3, p1, p2))
     calc_circle(p3, p1, p2, c);
   else {
     fprintf(stderr, "The three pts are perpendicular to axis");
@@ -96,5 +96,7 @@ int main(int argc, char *argv[]) {
   equation_circle_from_3point((point2d_t){.x = -1, .y = 0},
                               (point2d_t){.x = 0, .y = 2},
                               (point2d_t){.x = 1, .y = 0}, &circle);
+  printf("circle: center is (%f, %f), radius is %f \n", circle.center.x,
+         circle.center.y, circle.radius);
   return 0;
 }
